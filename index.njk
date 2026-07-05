@@ -1,0 +1,86 @@
+---
+layout: base.njk
+title: Home
+---
+{% set articles = collections.article %}
+{% set latest = articles[0] %}
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Edition {{ latest.data.edition or "—" }}</p>
+      <h1 class="hed-xl">{{ latest.data.title }}</h1>
+      <p class="dek">{{ latest.data.dek }}</p>
+      <a href="{{ latest.url }}" class="btn btn-solid">Read the Lead Story</a>
+      <div class="hero-meta">
+        <span class="eyebrow" style="color:var(--ink-faint)">{{ articles.length }} articles published</span>
+        <a href="/archive/" class="eyebrow" style="color:var(--water)">View All Editions →</a>
+      </div>
+    </div>
+    <div class="hero-figure">
+      <svg viewBox="0 0 520 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Architectural line drawing of a swan motif over a drafting grid">
+        <defs>
+          <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+            <path d="M0 0H26V26" fill="none" stroke="#C7BEA6" stroke-width="0.6"/>
+          </pattern>
+        </defs>
+        <rect x="0" y="0" width="520" height="480" fill="var(--card)"/>
+        <rect x="0" y="0" width="520" height="480" fill="url(#grid)"/>
+        <rect x="0.5" y="0.5" width="519" height="479" fill="none" stroke="#C7BEA6"/>
+        <g transform="translate(70,70) scale(2.6)" fill="none" stroke="#2E3D38" stroke-width="1.3" stroke-linecap="round">
+          <path d="M30 96C30 72 24 56 35 40C43 29 40 18 53 15C60 13 64 17 61 23C58 28 51 26 51 26"/>
+          <path d="M14 94C40 105 76 105 96 84C101 79 98 73 90 75C69 81 39 81 28 93"/>
+        </g>
+        <text x="30" y="30" font-family="Inter" font-size="10" letter-spacing="1" fill="#8A8574">ATELIER CYGNE</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <h2 class="hed-md">All Articles</h2>
+    <a href="/archive/" class="see-all">Editions</a>
+  </div>
+  <div class="feature-grid">
+    {% for article in articles %}
+      {% if not loop.first %}
+      <article class="card span-2">
+        <a href="{{ article.url }}">
+          <div class="card-figure">
+            {% if article.data.image %}
+              <img src="{{ article.data.image }}" alt="{{ article.data.title }}">
+            {% else %}
+              <svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#E2D9C6"/><rect x="40" y="40" width="120" height="70" fill="none" stroke="#445851" stroke-width="1.2"/></svg>
+            {% endif %}
+          </div>
+        </a>
+        <p class="card-cat">{{ article.data.category or "Essay" }}</p>
+        <a href="{{ article.url }}"><h3>{{ article.data.title }}</h3></a>
+        <p class="byline">By {{ article.data.byline }}{% if article.data.readTime %} · {{ article.data.readTime }} min read{% endif %}</p>
+      </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="band" id="subscribe">
+  <div class="wrap band-grid">
+    <div>
+      <p class="eyebrow">About the Journal</p>
+      <h2 class="hed-lg" style="margin-top:18px;">Written for rooms<br>that mean something.</h2>
+      <p class="dek" style="margin-top:22px; max-width:44ch;">Atelier Cygne is a monthly journal of interior design and architecture — one considered edition a month, no daily noise.</p>
+      <a href="/about/" class="btn" style="margin-top:26px;">More About Us</a>
+    </div>
+    <div>
+      <p class="eyebrow">Subscribe</p>
+      <h3 class="hed-sm" style="margin-top:16px; font-size:24px;">Get the next edition first.</h3>
+      <p style="color:var(--ink-soft); margin-top:12px; font-size:15px;">One email, once a month, the day each edition is published. No spam, ever.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Your email address" required aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="newsletter-note">Free. Cancel whenever you like.</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+---
+layout: base.njk
+title: Archive
+permalink: /archive/index.html
+---
+<section class="page-hero wrap">
+  <p class="eyebrow">The Archive</p>
+  <h1 class="hed-lg" style="margin-top:16px;">Every Article,<br>Since the First.</h1>
+  <p class="dek">Everything published in Atelier Cygne, most recent first.</p>
+</section>
+
+<section class="wrap" style="padding: 24px 0 80px;">
+  <div class="edition-list" style="border-top:1px solid var(--line);">
+    {% for article in collections.article %}
+    <a class="edition-row" href="{{ article.url }}" style="border-bottom-color:var(--line); color:var(--ink); grid-template-columns: 140px 1fr auto auto;">
+      <span class="num" style="color:var(--brass);">{{ article.data.edition or "—" }}</span>
+      <span class="title">{{ article.data.title }}</span>
+      <span class="date" style="color:var(--ink-faint);">{{ article.data.date | readableDate }}</span>
+      <span class="go" style="color:var(--water);">Read →</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>

@@ -1,0 +1,31 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: simple
+media_folder: "src/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "articles"
+    label: "Articles"
+    label_singular: "Article"
+    folder: "src/articles"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Subtitle / Dek", name: "dek", widget: "text", required: false }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["Essay", "Object Study", "Site Visit", "Interview", "Materials", "Opinion", "Portfolio", "Correspondence", "Notes"]
+        default: "Essay"
+      - { label: "Byline (your name)", name: "byline", widget: "string" }
+      - { label: "Edition (e.g. No. 08)", name: "edition", widget: "string", default: "No. 08" }
+      - { label: "Read Time (minutes)", name: "readTime", widget: "number", default: 6, value_type: "int" }
+      - { label: "Publish Date", name: "date", widget: "datetime", default: "" }
+      - { label: "Cover Image", name: "image", widget: "image", required: false }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "article.njk" }
+      - { label: "Body", name: "body", widget: "markdown" }

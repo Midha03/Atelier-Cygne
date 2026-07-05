@@ -1,0 +1,51 @@
+---
+layout: base.njk
+---
+<section class="article-hero wrap">
+  <div class="article-meta-row">
+    <span class="eyebrow">{{ category or "Essay" }}</span>
+    <span class="eyebrow" style="color:var(--ink-faint)">Edition {{ edition or "—" }}</span>
+  </div>
+  <h1 class="hed-lg article-title">{{ title }}</h1>
+  {% if dek %}<p class="dek article-dek">{{ dek }}</p>{% endif %}
+  <div class="article-byline">
+    <span><strong>{{ byline or "Atelier Cygne" }}</strong></span>
+    {% if readTime %}<span>{{ readTime }} min read</span>{% endif %}
+    {% if date %}<span>Published {{ date | readableDate }}</span>{% endif %}
+  </div>
+</section>
+
+{% if image %}
+<figure class="article-figure wrap">
+  <img src="{{ image }}" alt="{{ title }}" style="margin-top:40px; width:100%; aspect-ratio: 16/8; object-fit:cover;">
+</figure>
+{% endif %}
+
+<div class="wrap">
+  <div class="article-body">
+    {{ content | safe }}
+  </div>
+</div>
+
+<section class="related-strip wrap">
+  <div class="section-head" style="padding-top:0;">
+    <h2 class="hed-md">Continue Reading</h2>
+    <a href="/archive/" class="see-all">All editions</a>
+  </div>
+  <div class="feature-grid" style="padding-bottom:0;">
+    {% for other in collections.article %}
+      {% if other.url != page.url and loop.index <= 3 %}
+      <article class="card span-2">
+        <a href="{{ other.url }}">
+          <div class="card-figure">
+            <svg viewBox="0 0 200 150"><rect width="200" height="150" fill="#DCD4C0"/><circle cx="100" cy="75" r="46" fill="none" stroke="#2E3D38" stroke-width="1.2"/></svg>
+          </div>
+        </a>
+        <p class="card-cat">{{ other.data.category or "Essay" }}</p>
+        <a href="{{ other.url }}"><h3>{{ other.data.title }}</h3></a>
+        <p class="byline">By {{ other.data.byline }}</p>
+      </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
