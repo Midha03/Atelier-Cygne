@@ -4,7 +4,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("images");
   eleventyConfig.addPassthroughCopy("admin");
 
-  eleventyConfig.addFilter("readableDate", (dateObj) => {
+  eleventyConfig.addFilter("readableDate", function (dateObj) {
+    if (!dateObj) return "";
     const d = new Date(dateObj);
     return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
   });
