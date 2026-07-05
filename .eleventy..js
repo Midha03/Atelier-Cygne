@@ -1,8 +1,8 @@
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addPassthroughCopy("src/css");
-  eleventyConfig.addPassthroughCopy("src/js");
-  eleventyConfig.addPassthroughCopy("src/images");
-  eleventyConfig.addPassthroughCopy("src/admin");
+  eleventyConfig.addPassthroughCopy("css");
+  eleventyConfig.addPassthroughCopy("js");
+  eleventyConfig.addPassthroughCopy("images");
+  eleventyConfig.addPassthroughCopy("admin");
 
   eleventyConfig.addFilter("readableDate", (dateObj) => {
     const d = new Date(dateObj);
@@ -10,12 +10,12 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addCollection("article", function (collectionApi) {
-    return collectionApi.getFilteredByGlob("src/articles/*.md").sort((a, b) => b.date - a.date);
+    return collectionApi.getFilteredByGlob("articles/*.md").sort((a, b) => b.date - a.date);
   });
 
   return {
     dir: {
-      input: "src",
+      input: ".",
       output: "_site",
       includes: "_includes",
     },
